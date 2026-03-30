@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ColoreClock Test</title>
+</head>
+<body>
+
+<h2>ColoreClock</h2>
+
+<input id="name" placeholder="Nom" />
+
+<br><br>
+
+<button onclick="send('IN')">IN</button>
+<button onclick="send('OUT')">OUT</button>
+
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbzXEz1WlCGRx2L6GZ42_NKBzgzEo5887Vzd-a47_CdKdMYbGT3nl5qBG2oKrel1aryz/exec";
+
+function send(action) {
+const name = document.getElementById("name").value;
+
+fetch(URL, {
+method: "POST",
+body: JSON.stringify({
+name: name,
+action: action,
+secret: "moncode123"
+})
+})
+.then(res => res.text())
+.then(text => alert(text))
+.catch(err => alert("Erreur: " + err));
+}
+</script>
+
+</body>
+</html>
